@@ -1,0 +1,50 @@
+[
+  {
+    "id": 2,
+    "title": "nota de estudio",
+    "content": "un texto de prueba",
+    "archived": false,
+    "createdAt": "2025-05-23T19:25:52.486671",
+    "updatedAt": "2025-05-23T19:25:52.486671",
+    "category": {
+      "id": 2,
+      "name": "Estudio"
+    }
+  },
+  {
+    "id": 3,
+    "title": "Ir al medico",
+    "content": "voy a ir al medico a chequear mi salud",
+    "archived": false,
+    "createdAt": "2025-05-23T19:26:57.677383",
+    "updatedAt": "2025-05-24T18:02:58.384292",
+    "category": {
+      "id": 3,
+      "name": "Salud"
+    }
+  },
+  {
+    "id": 6,
+    "title": "Ir al ESTE LO VOY A BORRAR",
+    "content": "voy a ir al medico a chequear mi salud",
+    "archived": false,
+    "createdAt": "2025-05-23T19:35:41.690268",
+    "updatedAt": "2025-05-23T19:35:41.690268",
+    "category": {
+      "id": 6,
+      "name": "Otro"
+    }
+  },
+  {
+    "id": 7,
+    "title": "Ir al ESTE LO VOY A BORRAR",
+    "content": "voy a ir al medico a chequear mi salud",
+    "archived": false,
+    "createdAt": "2025-05-23T19:35:54.050118",
+    "updatedAt": "2025-05-23T19:35:54.050118",
+    "category": {
+      "id": 3,
+      "name": "Salud"
+    }
+  }
+]

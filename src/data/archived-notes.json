@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "probando",
+    "content": "un texto de prueba",
+    "archived": true,
+    "createdAt": "2025-05-23T19:25:13.36794",
+    "updatedAt": "2025-05-24T18:10:42.414599",
+    "category": {
+      "id": 6,
+      "name": "Otro"
+    }
+  },
+  {
+    "id": 5,
+    "title": "Ir al ESTE LO VOY A BORRAR",
+    "content": "voy a ir al medico a chequear mi salud",
+    "archived": true,
+    "createdAt": "2025-05-23T19:28:09.063265",
+    "updatedAt": "2025-05-24T18:10:49.398022",
+    "category": {
+      "id": 6,
+      "name": "Otro"
+    }
+  }
+]
