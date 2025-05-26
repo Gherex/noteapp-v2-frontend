@@ -1,26 +1,68 @@
-import BackToHome from "../components/BackToHome.jsx";
-import ActionButtons from "../components/ActionButtons.jsx";
+import { useState, useEffect } from "react";
+import {
+  fetchActiveNotes,
+  fetchActiveNotesByCategory,
+} from "../api/fetchNotes.js";
+import CategoryFilter from "../components/forms/CategoryFilter.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
-import { fetchActiveNotes } from "../api/fetchNotes.js";
-import useFetch from "../hooks/useFetch.js";
+import BackToHome from "../components/buttons/BackToHome.jsx";
+import ActionButtons from "../components/buttons/ActionButtons.jsx";
 
 function ActiveNotes() {
-  const {
-    data: notes,
-    loading,
-    error,
-    refetch,
-  } = useFetch(fetchActiveNotes, []);
+  const [notes, setNotes] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      try {
+        setLoading(true);
+        const notesData = selectedCategory
+          ? await fetchActiveNotesByCategory(selectedCategory)
+          : await fetchActiveNotes();
+        setNotes(notesData);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNotes();
+  }, [selectedCategory]);
+
+  const handleNoteAction = async () => {
+    try {
+      const notesData = selectedCategory
+        ? await fetchActiveNotesByCategory(selectedCategory)
+        : await fetchActiveNotes();
+      setNotes(notesData);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   if (loading) return <CircularProgress />;
-  if (error) return <p>⚠️ Error loading notes. Tap to retry.</p>;
+  if (error)
+    return (
+      <div className="active-notes-container">
+        <p className="center-text">⚠️ Error loading notes. Tap to retry.</p>
+        <BackToHome />
+      </div>
+    );
 
   return (
     <div className="active-notes-container">
       <h2>Active Notes</h2>
+      <CategoryFilter
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+      />
+
       <div className="notes-container">
-        {notes && notes.length > 0 ? (
-          notes.map((note) => (
+        {notes.length > 0 ? (
+          [...notes].reverse().map((note) => (
             <div className="notes-buttons-container" key={note.id}>
               <div className="note-card">
                 <div className="title-category-container">
@@ -42,14 +84,19 @@ function ActiveNotes() {
               <ActionButtons
                 noteid={note.id}
                 isArchived={false}
-                onActionComplete={refetch}
+                onActionComplete={handleNoteAction}
               />
             </div>
           ))
         ) : (
-          <p>All clear! No active notes found.</p>
+          <p className="center-text">
+            {selectedCategory
+              ? `No active notes found in ${selectedCategory} category`
+              : "All clear! No active notes found."}
+          </p>
         )}
       </div>
+
       <BackToHome />
     </div>
   );

@@ -139,7 +139,6 @@ h1 {
   max-width: 500px;
   margin-bottom: 2rem;
 }
-
 .note-card {
   color: var(--color-text);
   padding: 0 1rem;
@@ -177,14 +176,97 @@ h1 {
   flex-direction: column;
   gap: 10px;
 }
-.action-buttons button {
-  padding: 0.3rem 0.5rem;
+.action-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 35px;
   font-size: 1.2rem;
   border-radius: 50%;
   cursor: pointer;
   transition: 0.5s;
 }
-.action-buttons button:hover {
+.action-button:hover {
   background-color: #bfc4ff;
   transition: 0.5s;
+}
+.add-category-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+.center-text {
+  text-align: center;
+}
+/* --------------- MODAL --------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #000;
+  background: rgba(0, 0, 10, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.modal-content {
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 300px;
+  gap: 20px;
+}
+.modal-content h3 {
+  margin: 0;
+}
+.modal-content input {
+  background-color: var(--color-primary);
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--color-bg);
+  font-size: 1rem;
+  color: #000;
+  max-width: 75%;
+}
+.modal-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.modal-buttons-container button {
+  width: 100px;
+}
+/* --------------- CATEGORY FILTER --------------- */
+.category-filter {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: 3.2rem;
+  gap: 2px;
+}
+.category-filter label {
+  margin-right: 3px;
+  font-style: italic;
+}
+.category-filter select {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border: none;
+  outline: none;
+  padding: 5px;
+}
+.margin-bottom {
+  margin-bottom: 2rem;
 }

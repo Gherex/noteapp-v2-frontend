@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchNoteById, fetchAllCategories } from "../api/fetchNotes";
-import { updateNote } from "../api/notes";
-import UpdatedMessage from "./UpdatedMessage";
-import ErrorMessage from "./ErrorMessage";
+import { fetchNoteById, fetchAllCategories } from "../../api/fetchNotes";
+import { updateNote, createCategory } from "../../api/notes";
+import UpdatedMessage from "../messages/UpdatedMessage";
+import ErrorMessage from "../messages/ErrorMessage";
+import { FaPlus } from "react-icons/fa";
+import ModalNewCategory from "./ModalNewCategory";
+import CategorySelect from "./CategorySelect";
 
 function EditNoteForm() {
   const { id } = useParams();
@@ -17,7 +20,10 @@ function EditNoteForm() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Load categories and current note
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newCategoryInput, setNewCategoryInput] = useState("");
+  const [modalError, setModalError] = useState("");
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -29,7 +35,7 @@ function EditNoteForm() {
         setFormData({
           title: noteData.title,
           content: noteData.content,
-          category: noteData.category.id.toString(), // Match select value
+          category: noteData.category.id.toString(),
         });
       } catch (err) {
         setError("Failed to load note or categories.");
@@ -47,6 +53,37 @@ function EditNoteForm() {
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleNewCategory = async () => {
+    const input = newCategoryInput.trim();
+    if (!input) return;
+
+    const normalized = input.toLowerCase();
+    const existing = categories.find(
+      (cat) => cat.name.toLowerCase() === normalized
+    );
+
+    if (existing) {
+      setFormData((prev) => ({ ...prev, category: existing.id }));
+      setIsModalOpen(false);
+      setNewCategoryInput("");
+      return;
+    }
+
+    const formattedName =
+      input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+
+    try {
+      const newCategory = await createCategory({ name: formattedName });
+      setCategories((prev) => [...prev, newCategory]);
+      setFormData((prev) => ({ ...prev, category: newCategory.id }));
+      setIsModalOpen(false);
+      setNewCategoryInput("");
+    } catch (error) {
+      console.error("Error creating category:", error);
+      setModalError("Failed to create category");
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -98,20 +135,22 @@ function EditNoteForm() {
 
             <div className="label-container">
               <label htmlFor="category">Category: </label>
-              <select
-                id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                required
+              <CategorySelect
+                formDataCategory={formData.category}
+                handleChange={handleChange}
+                categories={categories}
+              />
+              <button
+                type="button"
+                className="add-category-button"
+                onClick={() => {
+                  setIsModalOpen(true);
+                  setModalError("");
+                }}
+                title="Add new category"
               >
-                <option value="">Select</option>
-                {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
+                <FaPlus />
+              </button>
             </div>
           </div>
 
@@ -133,6 +172,17 @@ function EditNoteForm() {
             Update Note
           </button>
         </form>
+      )}
+
+      {/* Modal */}
+      {isModalOpen && (
+        <ModalNewCategory
+          newCategoryInput={newCategoryInput}
+          setNewCategoryInput={setNewCategoryInput}
+          handleNewCategory={handleNewCategory}
+          modalError={modalError}
+          onClose={() => setIsModalOpen(false)}
+        />
       )}
     </div>
   );

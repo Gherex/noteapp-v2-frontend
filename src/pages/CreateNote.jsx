@@ -1,5 +1,5 @@
-import BackToHome from "../components/BackToHome.jsx";
-import CreateNoteForm from "../components/CreateNoteForm.jsx";
+import CreateNoteForm from "../components/forms/CreateNoteForm";
+import BackToHome from "../components/buttons/BackToHome";
 
 function CreateNote() {
   return (

@@ -9,7 +9,7 @@ function EditButton({ noteid }) {
   };
 
   return (
-    <button onClick={handleEdit}>
+    <button onClick={handleEdit} className="action-button">
       <LuPencil />
     </button>
   );

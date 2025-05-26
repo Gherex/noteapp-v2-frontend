@@ -1,5 +1,5 @@
 import { TbXboxX } from "react-icons/tb";
-import { unarchiveNote } from "../api/notes";
+import { unarchiveNote } from "../../api/notes";
 
 function UnarchiveButton({ noteid, onActionComplete }) {
   const handleUnarchived = async () => {
@@ -14,7 +14,7 @@ function UnarchiveButton({ noteid, onActionComplete }) {
   };
 
   return (
-    <button onClick={handleUnarchived}>
+    <button onClick={handleUnarchived} className="action-button">
       <TbXboxX />
     </button>
   );

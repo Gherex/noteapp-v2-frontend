@@ -1,5 +1,5 @@
 import { FaRegSave } from "react-icons/fa";
-import { archiveNote } from "../api/notes";
+import { archiveNote } from "../../api/notes";
 
 function ArchiveButton({ noteid, onActionComplete }) {
   const handleArchived = async () => {
@@ -14,7 +14,7 @@ function ArchiveButton({ noteid, onActionComplete }) {
   };
 
   return (
-    <button onClick={handleArchived}>
+    <button onClick={handleArchived} className="action-button">
       <FaRegSave />
     </button>
   );

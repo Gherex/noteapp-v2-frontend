@@ -6,21 +6,46 @@ export const fetchAllNotes = () =>
 export const fetchNoteById = (id) =>
   fetch(`${BASE_URL}/${id}`).then((res) => res.json());
 
-export const fetchActiveNotes = () =>
-  fetch(`${BASE_URL}/active`).then((res) => res.json());
+export const fetchActiveNotes = async () => {
+  const response = await fetch(`${BASE_URL}/active`);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
+};
 
-export const fetchArchivedNotes = () =>
-  fetch(`${BASE_URL}/archived`).then((res) => res.json());
+export const fetchArchivedNotes = async () => {
+  const response = await fetch(`${BASE_URL}/archived`);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
+};
 
-export const fetchActiveNotesByCategory = (category) =>
-  fetch(`${BASE_URL}/active?category=${encodeURIComponent(category)}`).then(
-    (res) => res.json()
+export const fetchActiveNotesByCategory = async (category) => {
+  const response = await fetch(
+    `${BASE_URL}/active?category=${encodeURIComponent(category)}`
   );
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
+};
 
-export const fetchArchivedNotesByCategory = (category) =>
-  fetch(`${BASE_URL}/archived?category=${encodeURIComponent(category)}`).then(
-    (res) => res.json()
+export const fetchArchivedNotesByCategory = async (category) => {
+  const response = await fetch(
+    `${BASE_URL}/archived?category=${encodeURIComponent(category)}`
   );
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
+};
 
-export const fetchAllCategories = () =>
-  fetch(`${BASE_URL}/categories`).then((res) => res.json());
+export const fetchAllCategories = async () => {
+  const response = await fetch(`${BASE_URL}/categories`);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
+};

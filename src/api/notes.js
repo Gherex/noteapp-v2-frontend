@@ -49,3 +49,24 @@ export const unarchiveNote = async (id) => {
 
   if (!res.ok) throw new Error("Error unarchiving note");
 };
+
+export const createCategory = async (category) => {
+  const res = await fetch(`${BASE_URL}/categories`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(category),
+  });
+
+  if (!res.ok) throw new Error("Error creating category");
+  return res.json();
+};
+
+export const deleteCategory = async (id) => {
+  const res = await fetch(`${BASE_URL}/categories/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) throw new Error("Error deleting category");
+};
