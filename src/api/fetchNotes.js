@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:8080/notes";
+// const BASE_URL = "http://localhost:8080/api/v1/notes";
+const BASE_URL = "https://noteapp-api-4eyd.onrender.com/api/v1/notes";
 
 export const fetchAllNotes = () =>
   fetch(`${BASE_URL}`).then((res) => res.json());

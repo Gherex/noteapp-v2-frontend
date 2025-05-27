@@ -272,7 +272,7 @@ h1 {
   margin-bottom: 2rem;
 }
 /* --------------- RESPONSIVE--------------- */
-@media screen and (min-width: 400px) {
+@media screen and (max-width: 400px) {
   .create-note-container {
     width: 100%;
   }
