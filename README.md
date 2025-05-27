@@ -68,6 +68,24 @@ To make the app accessible, I also deployed it using free hosting services:
 
 Feel free to explore it — all main functionality is available and working online.
 
+## 📷 Screenshots
+
+### Home
+
+![home](images/home.png)
+
+### Create note
+
+![create-note](images/create-note.png)
+
+### Active notes
+
+![active-note](images/active-note.png)
+
+### Archived notes
+
+![archived-note](images/archived-note.png)
+
 ### 📄 License
 
 This project is for demonstration purposes and not intended for production use.
